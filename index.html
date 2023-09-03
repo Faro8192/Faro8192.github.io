@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Calendar</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+
+    }
+
+    #datetime {
+      font-size: 7em; /* Adjust the font size as needed */
+      color: green;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    /* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+  </style>
+    <div class="topnav">
+      <a class="active" href="Homepage.html">Homepage</a>
+      <a href="SpaceBalls.html">SPACEBALLS</a>
+      <a href="calander.html">Calender</a>
+      <a href="#about">About</a>
+    </div>
+</head>
+<body>
+  
+  <h1>PSS calander</h1>
+  <div id="datetime"></div>
+
+  <script>
+    function getCustomDate() {
+      const now = new Date();
+      const year = now.getFullYear();
+
+      // Offset between custom calendar and Gregorian calendar
+    //  const offsetDays = 73 + 73 + 73 + 73 + 73; // Days in the custom months before January 1st
+
+      // Calculate the current day of the year in the custom calendar
+      const dayOfYear = Math.floor((now - new Date(year, 0, 1)) / (24 * 60 * 60 * 1000)) + 1 ;
+
+      // Determine the custom month and day
+      let month, day;
+      if (dayOfYear <= 73) {
+        month = "Faruary";
+        day = dayOfYear;
+      } else if (dayOfYear <= 146) {
+        month = "Emmarch";
+        day = dayOfYear-73;
+      } else if (dayOfYear <= 219) {
+        month = "Luxuly";
+        day = dayOfYear - 146;
+      } else if (dayOfYear <= 292) {
+        month = "Banavember";
+        day = dayOfYear - 219;
+      } else {
+        month = "Pewktober";
+        day = dayOfYear - 292;
+      }
+
+      const hour = String(now.getHours()).padStart(2, '0');
+      const minute = String(now.getMinutes()).padStart(2, '0');
+      const second = String(now.getSeconds()).padStart(2, '0');
+      const whichweekday = now.getDay();
+      listworkplz = ["Sunday","Moonday", "Toesday", "Witnessday", "Thunderday", "Freeday", "Frogday" ]
+   
+      thisweekday = listworkplz[whichweekday]
+
+      return `${thisweekday} ${day}  ${month} 1${year}
+      ${hour}:${minute}:${second} `;
+    }
+
+    function updateDateTime() {
+      const customDate = getCustomDate();
+      document.getElementById("datetime").innerHTML = customDate;
+    }
+
+    // Update the date and time every second
+    setInterval(updateDateTime, 1000);
+
+    // Initial update
+    updateDateTime();
+  </script>
+</body>
+</html>
